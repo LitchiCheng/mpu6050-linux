@@ -28,7 +28,6 @@ struct mpu6050_dev {
 	struct device_node	*nd; 	/* 设备节点 */
 	int major;					/* 主设备号 */
 	void *private_data;			/* 私有数据 		*/
-	// int cs_gpio;				/* 片选所使用的GPIO编号		*/
 	signed int gyro_x_adc;		/* 陀螺仪X轴原始值 	 */
 	signed int gyro_y_adc;		/* 陀螺仪Y轴原始值		*/
 	signed int gyro_z_adc;		/* 陀螺仪Z轴原始值 		*/
@@ -249,11 +248,6 @@ static struct i2c_driver mpu6050_driver = {
 	.id_table = mpu6050_id,
 };
 		   
-/*
- * @description	: 驱动入口函数
- * @param 		: 无
- * @return 		: 无
- */
 static int __init mpu6050_init(void)
 {
 	int ret = 0;
@@ -261,18 +255,13 @@ static int __init mpu6050_init(void)
 	return ret;
 }
 
-/*
- * @description	: 驱动出口函数
- * @param 		: 无
- * @return 		: 无
- */
-static void __exit ap3216c_exit(void)
+static void __exit mpu6050_exit(void)
 {
 	i2c_del_driver(&mpu6050_driver);
 }
 
 module_init(mpu6050_init);
-module_exit(ap3216c_exit);
+module_exit(mpu6050_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("darboy");
 
