@@ -10,6 +10,9 @@ kernel_modules:
 	date
 	$(CC) mpu6050Demo.c -o mpu6050Demo -Wall -pthread -O2
 
+install:
+	scp mpu6050Demo mpu6050.ko root@192.168.192.5:/home/root
+
 clean:
 	$(MAKE) -C $(KERNELDIR) M=$(CURRENT_PATH) clean
 	rm mpu6050Demo -rf
